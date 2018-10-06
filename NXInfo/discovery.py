@@ -64,7 +64,7 @@ def local_machine():
             print "ETH0 " + CGREEN + str(ETH0['mac']) + CEND
         except IndexError:
             pass
-    return WLAN, ETH0
+    return WLAN, ETH0, haveIP
 
 
 def surrounding():
@@ -113,7 +113,7 @@ def packet_callback(packet):
     data = packet.payload
     print CGREEN+CBOLD+"SRC "+CEND+CBOLD+str(SRC)+CEND
     print CRED+CBOLD+"DST "+CEND+CBOLD+str(DST)+CEND
-    print CITAL+CWHBLK+str(data)+CEND
+    print CITAL+CBLUE+CBOLD+str(data)+CEND
 
 
 def rogue_dhcp():
@@ -126,17 +126,31 @@ def rogue_dhcp():
     print "*--------------------------------------------------------------------------*"
     return ans, unans
 
+
 def main():
     if len(sys.argv) > 1:
         usage()
     else:
         ''' Get Info abt Local Machine & Nearby wifi signals '''
-        wlan, eth = local_machine()
+        wlan, eth,isNxd = local_machine()
         AccessPoints = surrounding()
         os.system('paplay complete.oga')
-        arping("192.168.1.*")
-        wpa_check,unans = rogue_dhcp()
-        for p in wpa_check: print CRED+p[1][Ether].src, p[1][IP].src+CEND
+
+        # If you have a network connection, find the other machines on the LAN
+        # and make sure you're connected to the correct DHCP server
+        if isNxd:
+            print CBOLD+CITAL+"\t\t\t:: ARPing the Lan ::"+CEND
+            ans, unan = arping("192.168.1.*")
+            lan_ppl = []
+            for arp in range(len(ans)):
+                lan_ppl.append(ans[arp][0].pdst)
+            for host in lan_ppl:
+                os.system('host '+host)
+            print "*------------------------------------------------------------*"
+            wpa_check, unans = rogue_dhcp()
+            for p in wpa_check: print CRED+p[1][Ether].src, p[1][IP].src+CEND
+
+    # Monitor Network Traffic. Assume No Trust.
     print CRED+CBOLD+CBLINK+"\t\t\tStarting Sniffer..."+CEND
     N = 0
     while N<10:
