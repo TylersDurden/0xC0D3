@@ -6,6 +6,8 @@
 
 File Encryption and Decryption 
 
+![example](https://raw.githubusercontent.com/TylersDurden/0xC0D3/master/HighSpeedTextProcessing.png)
+
 * ```p4x.py``` 
 
 Announces memory location of python program variables 

@@ -47,8 +47,9 @@ def main():
     decrypt_time = time.time()
     utility.write('key_file', key)
     utility.execute('python crypt.py -d encrypted_sherlock.txt  key_file', False)
-    print "Dencrypted uncompressed text and wrote to file encrypted_sherlock in " + \
+    print "Decrypted uncompressed text and wrote to file encrypted_sherlock in " + \
           str(time.time() - decrypt_time) + ' seconds'
+
 
 if __name__ == '__main__':
     main()
