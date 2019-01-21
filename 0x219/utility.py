@@ -12,8 +12,8 @@ def swap(fname, destroy):
 
 def write(fname, data):
     f = open(fname, 'w')
-    for buffer in data:
-        f.write(buffer)
+    for buff in data:
+        f.write(buff)
 
 
 def execute(command, destroy):
@@ -28,5 +28,4 @@ def list2str(words):
     return str_out
 
 
-
-
+# #################### END OF UTILITY FILES #################### #
