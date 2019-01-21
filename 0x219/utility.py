@@ -11,8 +11,9 @@ def swap(fname, destroy):
 
 
 def write(fname, data):
+    f = open(fname, 'w')
     for buffer in data:
-        open(fname, 'w').write(buffer)
+        f.write(buffer)
 
 
 def execute(command, destroy):
