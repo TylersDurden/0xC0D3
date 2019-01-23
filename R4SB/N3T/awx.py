@@ -1,6 +1,5 @@
 import urllib
 import sys, os
-import htmlentitydefs
 
 
 def create_basic_html_doc(title, page_name):
@@ -19,5 +18,11 @@ def create_tunnel_filesystem(name, path):
     open(name, 'a').write(top)
 
 
-# create_basic_html_doc('[AWX]: (A)utomated (W)eb e(X)tension', 'templates/awx.html')
-create_tunnel_filesystem('R4S83RRY', '/home/pi/Dropper')
+def main():
+    if '-pi_drop' in sys.argv:
+        # create_basic_html_doc('[AWX]: (A)utomated (W)eb e(X)tension', 'templates/awx.html')
+        create_tunnel_filesystem('R4S83RRY', '/home/pi/Dropper')
+
+
+if __name__ == '__main__':
+    main()
