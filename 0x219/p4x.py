@@ -7,14 +7,16 @@ class PointToMe:
     data_str = ''
     data_int = 0
     types = ['list', 'str', 'int']
-    reference = {'list':data_list,
-                 'str':data_str,
-                 'int':data_int}
+    reference = {'list': data_list,
+                 'str': data_str,
+                 'int': data_int}
 
     def __init__(self, data, type):
         if type in self.types:
             if type=='int':
                 self.data_int = data
+            if type == 'str':
+                self.data_str = data
 
 
 if '-read' in sys.argv:
@@ -35,6 +37,7 @@ def get_stack_mem_pointer(location):
     data[pointer] = contents
     print data
     return data
+
 
 def main():
     if 'buggy_0' in sys.argv:
@@ -57,6 +60,7 @@ def main():
             get_stack_mem_pointer(process_memory_location)
             os.system('rm log.txt')
             print '-----------------------------------------'
+
 
 if __name__ == '__main__':
     main()
